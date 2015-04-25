@@ -1,0 +1,107 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="bandwidth-gauge">
+  <style>
+    :host {
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      height: 165px;
+      width: 325px;
+    }
+
+    #chart {
+      position: absolute;      
+      width: 250px;
+      height: 250px;
+      border-width: 35px;
+      border-style: solid;
+      border-radius: 50%;
+      border-color: #2747f9;
+      clip: rect(0, 325px, 175px, 0px);
+      -webkit-transform: rotate(-180deg);
+      transition: 1s all;
+    }
+
+    #reading {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      text-align: center;
+      font-size: 2em;
+    }
+
+    #reading span:first-child {
+      font-size:1.5em;
+    }
+  </style>
+  <template>
+    <div id="name">{{name}}</div>
+    <div id="chart"></div>
+    <div id="reading">
+      <span>{{bandwidth.speed}}</span>
+      <br>
+      <span>{{bandwidth.unit}}</span>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'bandwidth-gauge',
+    ready: function() {
+      // TODO implement sane defaults
+    },
+    properties: {
+      name: {
+        type: String,
+        value: "Gage"
+      },
+
+      // Expects: 
+      // {
+      //  'speed': 10.01, 
+      //  'unit': 'MB/s'
+      // }
+      bandwidth: {
+        type: Object
+      },
+
+      // the max MB/s for the connection
+      scale: {
+        type: Number
+      }
+    },
+    observers: {
+      'bandwidth': 'updateChart'
+    },
+    updateChart: function(bandwidth) {
+      var deg;
+
+      // Only takes into account KB/s and MB/s at the moment
+      if (bandwidth.unit === 'KB/s') {
+        deg = 180 - ((parseInt(bandwidth.speed)/1000) / this.scale) * 180
+      } else {
+        deg = 180 - (parseInt(bandwidth.speed) / this.scale) * 180
+      }
+
+      // new utility method in 0.8
+      // https://www.polymer-project.org/0.8/docs/devguide/utility-functions.html
+      this.transform(this.$.chart, 'rotate(' + -deg + 'deg)')
+
+      // Cheap color tricks at random stops :-)
+      if (deg < 45) {
+        this.$.chart.style.borderColor = '#ff0000'
+      }
+      else if (deg < 100) {
+        this.$.chart.style.borderColor = '#ff9400'
+      }
+      else if (deg < 135) {
+        this.$.chart.style.borderColor = '#1edf0a'
+      }
+      else {
+        this.$.chart.style.borderColor = '#2747f9'
+      }
+    }
+  });
+</script>

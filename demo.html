@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="bandwidth-gauge.html">
+    <style type="text/css">
+      body {
+        font-family: Roboto, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <bandwidth-gauge id="out" name="Out" scale="3"></bandwidth-gauge>
+    <bandwidth-gauge id="in" name="In" scale="20"></bandwidth-gauge>
+  <script>
+    // No more polymer-ready in 0.8
+    // https://github.com/Polymer/polymer/issues/1381
+    document.addEventListener('WebComponentsReady', function() {
+      document.getElementById("out").bandwidth = {
+        'speed': 100.01, 
+        'unit': 'KB/s'
+      };
+      document.getElementById("in").bandwidth = {
+        'speed': 10.01, 
+        'unit': 'MB/s'
+      };
+    });
+  </script>
+  </body>
+</html>

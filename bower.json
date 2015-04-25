@@ -1,0 +1,19 @@
+{
+  "name": "bandwidth-gauge",
+  "version": "0.0.1",
+  "authors": [
+    "Justin Ribeiro <justin.david.ribeiro@gmail.com>"
+  ],
+  "license": "Apache v2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.6.*",
+    "polymer": "polymer/polymer#^0.8.0-rc.7"
+  }
+}
