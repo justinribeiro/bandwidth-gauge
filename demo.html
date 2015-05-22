@@ -16,19 +16,17 @@
   <body>
     <bandwidth-gauge id="out" name="Out" scale="3"></bandwidth-gauge>
     <bandwidth-gauge id="in" name="In" scale="20"></bandwidth-gauge>
-  <script>
-    // No more polymer-ready in 0.8
-    // https://github.com/Polymer/polymer/issues/1381
-    document.addEventListener('WebComponentsReady', function() {
-      document.getElementById("out").bandwidth = {
-        'speed': 100.01, 
-        'unit': 'KB/s'
-      };
-      document.getElementById("in").bandwidth = {
-        'speed': 10.01, 
-        'unit': 'MB/s'
-      };
-    });
-  </script>
+    <script>
+      document.addEventListener('WebComponentsReady', function() {
+        document.getElementById("out").bandwidth = {
+          'speed': 100.01, 
+          'unit': 'KB/s'
+        };
+        document.getElementById("in").bandwidth = {
+          'speed': 10.01, 
+          'unit': 'MB/s'
+        };
+      });
+    </script>
   </body>
 </html>

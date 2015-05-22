@@ -1,18 +1,14 @@
 # bandwidth-gauge
 
-Polymer 0.8 element that shows an animated gauge based on data from a network adapter.
+Polymer element that shows an animated gauge based on data from a network adapter.
 
-## Why?
+## Live demo
 
-Little something something to render data from [wan-snmp-to-firebase-bridge](https://github.com/justinribeiro/wan-snmp-to-firebase-bridge) for [GDG Oakdale's Firebase Code Day](http://www.meetup.com/GDG-Oakdale/events/220949519/).
-
-## Demo
-
-There is a live demo of the element in action: [Placeholder]()
+There is a live demo of the element in action, connected to my [wan-snmp-to-firebase-bridge](https://github.com/justinribeiro/wan-snmp-to-firebase-bridge): [https://wan-traffic-logger.firebaseapp.com/](https://wan-traffic-logger.firebaseapp.com/)
 
 ## Dependencies
 
-1. [Polymer 0.8](https://www.polymer-project.org/0.8/)
+1. [Polymer 0.9](https://www.polymer-project.org/0.9/)
 
 ## Basic Usage
 

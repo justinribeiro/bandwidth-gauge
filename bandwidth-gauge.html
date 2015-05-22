@@ -1,4 +1,4 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="bower_components/polymer/polymer.html">
 
 <dom-module id="bandwidth-gauge">
   <style>
@@ -13,7 +13,7 @@
     #chart {
       position: absolute;      
       width: 250px;
-      height: 250px;
+      height: 251px;
       border-width: 35px;
       border-style: solid;
       border-radius: 50%;
@@ -64,7 +64,9 @@
       //  'unit': 'MB/s'
       // }
       bandwidth: {
-        type: Object
+        type: Object,
+        observer: 'updateChart',
+        notify: true
       },
 
       // the max MB/s for the connection
@@ -72,22 +74,22 @@
         type: Number
       }
     },
-    observers: {
-      'bandwidth': 'updateChart'
-    },
-    updateChart: function(bandwidth) {
+    observers: [
+      'updateChart(bandwidth)'
+    ],
+    updateChart: function() {
       var deg;
 
       // Only takes into account KB/s and MB/s at the moment
-      if (bandwidth.unit === 'KB/s') {
-        deg = 180 - ((parseInt(bandwidth.speed)/1000) / this.scale) * 180
+      if (this.bandwidth.unit === 'KB/s') {
+        deg = 180 - ((parseInt(this.bandwidth.speed)/1000) / this.scale) * 180
       } else {
-        deg = 180 - (parseInt(bandwidth.speed) / this.scale) * 180
+        deg = 180 - (parseInt(this.bandwidth.speed) / this.scale) * 180
       }
 
       // new utility method in 0.8
       // https://www.polymer-project.org/0.8/docs/devguide/utility-functions.html
-      this.transform(this.$.chart, 'rotate(' + -deg + 'deg)')
+      this.transform('rotate(' + -deg + 'deg)', this.$.chart);
 
       // Cheap color tricks at random stops :-)
       if (deg < 45) {
